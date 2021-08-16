@@ -9,6 +9,7 @@ fi
 
 MAJOR_VERSION=`echo ${STACK_VERSION} | cut -c 1`
 
+ls -la
 docker build -t elastic-senteca ./elastic-senteca
 
 docker network create elastic
