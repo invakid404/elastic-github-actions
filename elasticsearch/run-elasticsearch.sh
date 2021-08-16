@@ -9,7 +9,12 @@ fi
 
 MAJOR_VERSION=`echo ${STACK_VERSION} | cut -c 1`
 
-ls -la
+mkdir -p ./elastic-senteca
+cat > ./elastic-senteca/Dockerfile <<-EOF
+	FROM docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
+	RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch analysis-icu
+	EOF
+
 docker build -t elastic-senteca ./elastic-senteca
 
 docker network create elastic
