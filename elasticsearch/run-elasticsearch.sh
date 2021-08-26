@@ -37,7 +37,7 @@ do
     --env "discovery.seed_hosts=es1" \
     --env "cluster.routing.allocation.disk.threshold_enabled=false" \
     --env "bootstrap.memory_lock=true" \
-    --env "ES_JAVA_OPTS=-Xms1g -Xmx1g" \
+    --env "ES_JAVA_OPTS=-Xms512m -Xmx512m" \
     --env "xpack.security.enabled=false" \
     --env "xpack.license.self_generated.type=basic" \
     --env "http.port=${port}" \
