@@ -1,10 +1,5 @@
 #!/bin/bash
 
-if [[ -z $STACK_VERSION ]]; then
-  echo -e "\033[31;1mERROR:\033[0m Required environment variable [STACK_VERSION] not set\033[0m"
-  exit 1
-fi
-
 mkdir -p ./elastic-senteca
 cat > ./elastic-senteca/Dockerfile <<-EOF
 	FROM docker.elastic.co/elasticsearch/elasticsearch:7.13.4
@@ -17,15 +12,15 @@ docker build -t elastic-senteca ./elastic-senteca
 
 docker network create elastic
 
-for (( node=1; node<=${NODES-1}; node++ ))
+for (( node=1; node<=0; node++ ))
 do
   port_com=$((9300 + $node - 1))
   UNICAST_HOSTS+="es$node:${port_com},"
 done
 
-for (( node=1; node<=${NODES-1}; node++ ))
+for (( node=1; node<=0; node++ ))
 do
-  port=$((PORT + $node - 1))
+  port=$((9300 + $node - 1))
   port_com=$((9300 + $node - 1))
   docker run \
     --rm \
@@ -59,7 +54,7 @@ docker run \
   --retry-connrefused \
   --show-error \
   --silent \
-  http://es1:$PORT
+  http://es1:9300
 
 sleep 10
 
