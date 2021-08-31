@@ -5,12 +5,9 @@ if [[ -z $STACK_VERSION ]]; then
   exit 1
 fi
 
-STACK_VERSION="7.13.4"
-MAJOR_VERSION=`echo ${STACK_VERSION} | cut -c 1`
-
 mkdir -p ./elastic-senteca
 cat > ./elastic-senteca/Dockerfile <<-EOF
-	FROM docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
+	FROM docker.elastic.co/elasticsearch/elasticsearch:7.13.4
 	RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch analysis-icu
 	EOF
 
