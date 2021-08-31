@@ -7,6 +7,7 @@ if [[ -z $STACK_VERSION ]]; then
   exit 1
 fi
 
+STACK_VERSION="7.13.4"
 MAJOR_VERSION=`echo ${STACK_VERSION} | cut -c 1`
 
 mkdir -p ./elastic-senteca
