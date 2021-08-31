@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -euxo pipefail
-
 if [[ -z $STACK_VERSION ]]; then
   echo -e "\033[31;1mERROR:\033[0m Required environment variable [STACK_VERSION] not set\033[0m"
   exit 1
@@ -15,6 +13,8 @@ cat > ./elastic-senteca/Dockerfile <<-EOF
 	FROM docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
 	RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch analysis-icu
 	EOF
+
+cat ./elastic-senteca/Dockerfile
 
 docker build -t elastic-senteca ./elastic-senteca
 
